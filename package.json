@@ -1,0 +1,28 @@
+{
+    "name": "svelte-imageslider",
+    "version": "0.0.1",
+    "description": "Native before/after image slider component for Svelte",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "svelte": "src/index.js",
+    "scripts": {
+        "build": "rollup -c",
+        "dev": "rollup -c -w"
+    },
+    "keywords": ["Svelte", "component", "image", "slider"],
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/yikuansun/svelte-imageslider.git"
+    },
+    "author": {
+        "name": "Yikuan Sun",
+        "url": "https://yikuansun.github.io"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "rollup": "^4.18.0",
+        "rollup-plugin-node-resolve": "^5.2.0",
+        "rollup-plugin-svelte": "^7.2.2",
+        "svelte": "^4.2.18"
+    }
+}
