@@ -23,6 +23,10 @@
         sliderPercent = (e.pageX - invisibleCover.getBoundingClientRect().x) / invisibleCover.getBoundingClientRect().width * 100;
         sliderPercent = Math.min(Math.max(sliderPercent, 0), 100);
     }
+    function handleMobileDrag(e) {
+        sliderPercent = (e.touches[0].pageX - invisibleCover.getBoundingClientRect().x) / invisibleCover.getBoundingClientRect().width * 100;
+        sliderPercent = Math.min(Math.max(sliderPercent, 0), 100);
+    }
 </script>
 
 <svelte:document
@@ -31,7 +35,14 @@
     }}
     on:mouseup={() => {
         dragging = false;
-    }} />
+    }}
+    on:touchmove={(e) => {
+        if (dragging) handleMobileDrag(e);
+    }}
+    on:touchend={() => {
+        dragging = false;
+    }}
+/>
 
 <div class="imageSlider">
     <div style="">
@@ -50,6 +61,11 @@
             e.preventDefault();
             dragging = true;
             handleDrag(e);
+        }}
+        on:touchstart={(e) => {
+            e.preventDefault();
+            dragging = true;
+            handleMobileDrag(e);
         }}
         style:cursor={dragging?"ew-resize":"pointer"}>
     </div>
