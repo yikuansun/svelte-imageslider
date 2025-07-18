@@ -1,27 +1,44 @@
 <script>
+    /** Separator position, as a percentage (0 to 100). Can be set by the user. */
     export let sliderPercent = 50;
 
+    /** @type {string} URL of the "before" image (left of separator). */
     export let src1;
+    /** @type {string} URL of the "after" image (right of separator). */
     export let src2;
 
+    /** Left side caption. */
     export let caption1 = "";
+    /** Right side caption. */
     export let caption2 = "";
 
+    /** Separator width, in pixels. */
     export let separatorWidth = 4;
+    /** Separator color. Can be any CSS color. */
     export let separatorColor = "white";
 
-    /** @type {"none" | "arrows" | "circle" | "triangles"} */
+    /** @type {"none" | "arrows" | "circle" | "triangles"} Handle icon type. */
     export let handleType = "none";
+    /** Handle icon size, in pixels. */
     export let handleSize = 42;
 
     /** @type {HTMLDivElement} */
     let invisibleCover;
 
+    /** Whether the user is currently dragging the slider. Used for svelte:document event listeners. */
     let dragging = false;
+    /**
+     * Calculate slider percent based on mouse position.
+     * @param {MouseEvent} e
+     */
     function handleDrag(e) {
         sliderPercent = (e.pageX - invisibleCover.getBoundingClientRect().x) / invisibleCover.getBoundingClientRect().width * 100;
         sliderPercent = Math.min(Math.max(sliderPercent, 0), 100);
     }
+    /**
+     * Calculate slider percent based on touch position.
+     * @param {TouchEvent} e
+     */
     function handleMobileDrag(e) {
         sliderPercent = (e.touches[0].pageX - invisibleCover.getBoundingClientRect().x) / invisibleCover.getBoundingClientRect().width * 100;
         sliderPercent = Math.min(Math.max(sliderPercent, 0), 100);
@@ -44,16 +61,22 @@
 />
 
 <div class="imageSlider">
-    <div style="">
+    <div>
+        <!-- Before image (left of separator) -->
         <img src={src1} alt="before" style:width="100%" draggable={false} />
     </div>
     <div style:position="absolute" style:top="0" style:right="0" style:height="100%" style:overflow-x="hidden"
         style:width="calc({100 - sliderPercent}% - {separatorWidth / 2}px)" style:border-left="{separatorWidth}px solid {separatorColor}" style:transition="width 0.1s"
         style:max-width="calc(100% - {separatorWidth}px)" style:min-width="0">
+        <!-- After image (right of separator) -->
         <img src={src2} alt="after" style:height="100%" style:float="right" draggable={false} />
     </div>
+
+    <!-- Captions -->
     {#if caption1}<span class="imageLabel" style:left="0">{caption1}</span>{/if}
     {#if caption2}<span class="imageLabel" style:right="0">{caption2}</span>{/if}
+
+    <!-- Handle -->
     <div style:position="absolute" style:top="50%" style:left="{sliderPercent}%"
         style:width="{handleSize}px" style:height="{handleSize}px" style:transform="translate(-50%, -50%)"
         style:transition="left 0.1s">
@@ -79,6 +102,8 @@
             </svg>
         {/if}
     </div>
+
+    <!-- Invisible cover for dragging -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="invisibleCover" bind:this={invisibleCover}
         on:mousedown={(e) => {
