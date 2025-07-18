@@ -52,7 +52,8 @@
         <img src={src1} alt="before" style:width="100%" draggable={false} />
     </div>
     <div style:position="absolute" style:top="0" style:right="0" style:height="100%" style:overflow-x="hidden"
-        style:width="{100 - sliderPercent}%" style:border-left="4px solid white" style:transition="width 0.1s">
+        style:width="{100 - sliderPercent}%" style:border-left="4px solid white" style:transition="width 0.1s"
+        style:max-width="calc(100% - 4px)" style:min-width="0">
         <img src={src2} alt="after" style:height="100%" style:float="right" draggable={false} />
     </div>
     {#if caption1}<span class="imageLabel" style:left="0">{caption1}</span>{/if}
