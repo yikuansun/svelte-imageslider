@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
 
-    let sliderPercent = 50;
+    export let sliderPercent = 50;
 
     onMount(() => {
     });
