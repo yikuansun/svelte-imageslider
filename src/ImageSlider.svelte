@@ -49,25 +49,27 @@
 
 <div class="imageSlider">
     <div style="">
-        <img src={src1} alt="before" style="width: 100%;" draggable={false} />
+        <img src={src1} alt="before" style:width="100%" draggable={false} />
     </div>
-    <div style="position: absolute; top: 0; right: 0; height: 100%; overflow-x: hidden; width: {100 - sliderPercent}%; border-left: 4px solid white; transition: width 0.1s;">
-        <img src={src2} alt="after" style="height: 100%; float: right;" draggable={false} />
+    <div style:position="absolute" style:top="0" style:right="0" style:height="100%" style:overflow-x="hidden"
+        style:width="{100 - sliderPercent}%" style:border-left="4px solid white" style:transition="width 0.1s">
+        <img src={src2} alt="after" style:height="100%" style:float="right" draggable={false} />
     </div>
-    {#if caption1}<span class="imageLabel" style="left: 0;">{caption1}</span>{/if}
-    {#if caption2}<span class="imageLabel" style="right: 0;">{caption2}</span>{/if}
+    {#if caption1}<span class="imageLabel" style:left="0">{caption1}</span>{/if}
+    {#if caption2}<span class="imageLabel" style:right="0">{caption2}</span>{/if}
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="invisibleCover" on:mousedown={(e) => {
-        e.preventDefault();
-        dragging = true;
-        handleDrag(e);
-    }} use:globalMousemove use:globalMouseup
-    on:gmousemove={(e) => {
-        e.preventDefault();
-        if (dragging) handleDrag(e);
-    }} on:gmouseup={() => {
-        dragging = false;
-    }} style="cursor: {dragging?"ew-resize":"pointer"};"></div>
+            e.preventDefault();
+            dragging = true;
+            handleDrag(e);
+        }} use:globalMousemove use:globalMouseup
+        on:gmousemove={(e) => {
+            e.preventDefault();
+            if (dragging) handleDrag(e);
+        }} on:gmouseup={() => {
+            dragging = false;
+        }} style:cursor={dragging?"ew-resize":"pointer"}>
+    </div>
 </div>
 
 <!--
