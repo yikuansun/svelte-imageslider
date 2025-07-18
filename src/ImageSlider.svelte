@@ -56,6 +56,7 @@
     </div>
     {#if caption1}<span class="imageLabel" style="left: 0;">{caption1}</span>{/if}
     {#if caption2}<span class="imageLabel" style="right: 0;">{caption2}</span>{/if}
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="invisibleCover" on:mousedown={(e) => {
         e.preventDefault();
         dragging = true;
