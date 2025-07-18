@@ -15,40 +15,23 @@
     export let separatorWidth = 4;
     export let separatorColor = "white";
 
+    /** @type {HTMLDivElement} */
+    let invisibleCover;
+
     let dragging = false;
     function handleDrag(e) {
-        sliderPercent = (e.pageX - e.target.getBoundingClientRect().x) / e.target.getBoundingClientRect().width * 100;
+        sliderPercent = (e.pageX - invisibleCover.getBoundingClientRect().x) / invisibleCover.getBoundingClientRect().width * 100;
         sliderPercent = Math.min(Math.max(sliderPercent, 0), 100);
     }
-
-    function globalMousemove(node) {
-        const handleEvt = (e) => {
-            node.dispatchEvent(new MouseEvent('gmousemove', e));
-        };
-
-        document.addEventListener("mousemove", handleEvt, true);
-
-        return {
-            destroy() {
-                document.removeEventListener("mousemove", handleEvt, true);
-            }
-        };
-    }
-
-    function globalMouseup(node) {
-        const handleEvt = (e) => {
-            node.dispatchEvent(new MouseEvent('gmouseup', e));
-        };
-
-        document.addEventListener("mouseup", handleEvt, true);
-
-        return {
-            destroy() {
-                document.removeEventListener("mouseup", handleEvt, true);
-            }
-        };
-    }
 </script>
+
+<svelte:document
+    on:mousemove={(e) => {
+        if (dragging) handleDrag(e);
+    }}
+    on:mouseup={() => {
+        dragging = false;
+    }} />
 
 <div class="imageSlider">
     <div style="">
@@ -62,17 +45,13 @@
     {#if caption1}<span class="imageLabel" style:left="0">{caption1}</span>{/if}
     {#if caption2}<span class="imageLabel" style:right="0">{caption2}</span>{/if}
     <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <div class="invisibleCover" on:mousedown={(e) => {
+    <div class="invisibleCover" bind:this={invisibleCover}
+        on:mousedown={(e) => {
             e.preventDefault();
             dragging = true;
             handleDrag(e);
-        }} use:globalMousemove use:globalMouseup
-        on:gmousemove={(e) => {
-            e.preventDefault();
-            if (dragging) handleDrag(e);
-        }} on:gmouseup={() => {
-            dragging = false;
-        }} style:cursor={dragging?"ew-resize":"pointer"}>
+        }}
+        style:cursor={dragging?"ew-resize":"pointer"}>
     </div>
 </div>
 
