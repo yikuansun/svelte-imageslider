@@ -15,6 +15,10 @@
     export let separatorWidth = 4;
     export let separatorColor = "white";
 
+    /** @type {"none" | "arrows" | "circle" | "triangles"} */
+    export let handleType = "none";
+    export let handleSize = 42;
+
     /** @type {HTMLDivElement} */
     let invisibleCover;
 
@@ -55,6 +59,31 @@
     </div>
     {#if caption1}<span class="imageLabel" style:left="0">{caption1}</span>{/if}
     {#if caption2}<span class="imageLabel" style:right="0">{caption2}</span>{/if}
+    <div style:position="absolute" style:top="50%" style:left="{sliderPercent}%"
+        style:width="{handleSize}px" style:height="{handleSize}px" style:transform="translate(-50%, -50%)"
+        style:transition="left 0.1s">
+        {#if handleType === "triangles"}
+            <svg style:width="100%" style:height="100%" viewBox="0 0 100 100">
+                <polygon points="30,20 0,50 30,80" style:fill={separatorColor} />
+                <polygon points="70,20 100,50 70,80" style:fill={separatorColor} />
+            </svg>
+        {:else if handleType === "circle"}
+            <svg style:width="100%" style:height="100%" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" style:fill="transparent" style:stroke={separatorColor} style:stroke-width="7" />
+                <polygon points="30,40 20,50 30,60" style:fill={separatorColor} />
+                <polygon points="70,40 80,50 70,60" style:fill={separatorColor} />
+            </svg>
+        {:else if handleType === "arrows"}
+            <svg style:width="100%" style:height="100%" viewBox="0 0 100 100">
+                <line x1="10" y1="50" x2="30" y2="30" style:stroke={separatorColor} style:stroke-width="7" />
+                <line x1="10" y1="50" x2="30" y2="70" style:stroke={separatorColor} style:stroke-width="7" />
+                <circle cx="10" cy="50" r="3.5" style:fill={separatorColor} />
+                <line x1="90" y1="50" x2="70" y2="30" style:stroke={separatorColor} style:stroke-width="7" />
+                <line x1="90" y1="50" x2="70" y2="70" style:stroke={separatorColor} style:stroke-width="7" />
+                <circle cx="90" cy="50" r="3.5" style:fill={separatorColor} />
+            </svg>
+        {/if}
+    </div>
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="invisibleCover" bind:this={invisibleCover}
         on:mousedown={(e) => {
@@ -82,6 +111,7 @@ Before -
         display: inline-block;
         width: 100%;
         position: relative;
+        overflow-x: hidden;
     }
 
     .imageSlider img {
