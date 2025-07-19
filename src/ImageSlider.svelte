@@ -112,7 +112,6 @@
             handleDrag(e);
         }}
         on:touchstart={(e) => {
-            e.preventDefault();
             dragging = true;
             handleMobileDrag(e);
         }}
