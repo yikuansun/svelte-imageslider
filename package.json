@@ -2,7 +2,7 @@
     "name": "svelte-imageslider",
     "version": "1.0.0",
     "scripts": {
-        "dev": "vite dev",
+        "dev": "vite dev --host",
         "build": "vite build && npm run package",
         "preview": "vite preview",
         "package": "svelte-kit sync && svelte-package && publint",

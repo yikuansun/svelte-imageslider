@@ -1,3 +1,7 @@
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+    import ImageSlider from "$lib/index.js";
+</script>
+
+<ImageSlider src1="https://lunalgraphics.com/_app/immutable/assets/superbloom4before.DHlgULHZ.jpg" src2="https://lunalgraphics.com/_app/immutable/assets/superbloom4after.Dq0TM44B.jpg"
+    caption1="Before" caption2="After"
+    handleType="circle" separatorColor="grey" />
