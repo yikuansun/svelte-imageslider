@@ -1,38 +1,42 @@
 {
     "name": "svelte-imageslider",
     "version": "1.0.0",
-    "description": "Native before/after image slider component for Svelte",
-    "main": "dist/index.js",
-    "module": "dist/index.mjs",
-    "svelte": "src/index.js",
+    "scripts": {
+        "dev": "vite dev",
+        "build": "vite build && npm run package",
+        "preview": "vite preview",
+        "package": "svelte-kit sync && svelte-package && publint",
+        "prepublishOnly": "npm run package",
+        "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+        "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
+    },
     "exports": {
         ".": {
-            "svelte": "./src/index.js"
+            "types": "./dist/index.d.ts",
+            "svelte": "./dist/index.js"
         }
     },
-    "scripts": {
-        "build": "rollup -c",
-        "dev": "rollup -c -w"
-    },
-    "keywords": [
-        "Svelte",
-        "component",
-        "image",
-        "slider"
+    "files": [
+        "dist",
+        "!dist/**/*.test.*",
+        "!dist/**/*.spec.*"
     ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/yikuansun/svelte-imageslider.git"
+    "peerDependencies": {
+        "svelte": "^4.0.0"
     },
-    "author": {
-        "name": "Yikuan Sun",
-        "url": "https://yikuansun.github.io"
+    "devDependencies": {
+        "@sveltejs/adapter-auto": "^3.0.0",
+        "@sveltejs/kit": "^2.0.0",
+        "@sveltejs/package": "^2.0.0",
+        "@sveltejs/vite-plugin-svelte": "^3.0.0",
+        "publint": "^0.1.9",
+        "svelte": "^4.2.7",
+        "svelte-check": "^3.6.0",
+        "tslib": "^2.4.1",
+        "typescript": "^5.0.0",
+        "vite": "^5.0.11"
     },
-    "license": "MIT",
-    "dependencies": {
-        "rollup": "^4.18.0",
-        "rollup-plugin-node-resolve": "^5.2.0",
-        "rollup-plugin-svelte": "^7.2.2",
-        "svelte": "^4.2.18"
-    }
+    "svelte": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "type": "module"
 }
