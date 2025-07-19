@@ -14,10 +14,15 @@
         "build": "rollup -c",
         "dev": "rollup -c -w"
     },
-    "keywords": ["Svelte", "component", "image", "slider"],
+    "keywords": [
+        "Svelte",
+        "component",
+        "image",
+        "slider"
+    ],
     "repository": {
-        "type" : "git",
-        "url" : "https://github.com/yikuansun/svelte-imageslider.git"
+        "type": "git",
+        "url": "git+https://github.com/yikuansun/svelte-imageslider.git"
     },
     "author": {
         "name": "Yikuan Sun",
