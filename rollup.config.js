@@ -1,5 +1,5 @@
 import svelte from "rollup-plugin-svelte";
-import resolve from "rollup-plugin-node-resolve";
+import resolve from "@rollup/plugin-node-resolve";
 
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
