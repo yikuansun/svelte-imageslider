@@ -29,7 +29,7 @@
         "url": "https://yikuansun.github.io"
     },
     "license": "MIT",
-    "dependencies": {
+    "devDependencies": {
         "@rollup/plugin-node-resolve": "^16.0.1",
         "rollup": "^4.45.1",
         "rollup-plugin-svelte": "^7.2.2",
