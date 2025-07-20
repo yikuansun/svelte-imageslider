@@ -1,6 +1,6 @@
 {
     "name": "svelte-imageslider",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Native before/after image slider component for Svelte",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
