@@ -35,17 +35,20 @@
         sliderPercent = (e.clientX - invisibleCover.getBoundingClientRect().x) / invisibleCover.getBoundingClientRect().width * 100;
         sliderPercent = Math.min(Math.max(sliderPercent, 0), 100);
     }
+
+    /** Index of the correct touch event */
+    let touchIndex = 0;
     /**
      * Calculate slider percent based on touch position.
      * @param {TouchEvent} e
      */
     function handleMobileDrag(e) {
-        sliderPercent = (e.touches[0].clientX - invisibleCover.getBoundingClientRect().x) / invisibleCover.getBoundingClientRect().width * 100;
+        sliderPercent = (e.touches[touchIndex].clientX - invisibleCover.getBoundingClientRect().x) / invisibleCover.getBoundingClientRect().width * 100;
         sliderPercent = Math.min(Math.max(sliderPercent, 0), 100);
     }
 </script>
 
-<svelte:document
+<svelte:window
     on:mousemove={(e) => {
         if (dragging) handleDrag(e);
     }}
@@ -114,6 +117,7 @@
         on:touchstart={(e) => {
             e.preventDefault();
             dragging = true;
+            touchIndex = e.touches.length - 1;
             handleMobileDrag(e);
         }}
         style:cursor={dragging?"ew-resize":"pointer"}>
