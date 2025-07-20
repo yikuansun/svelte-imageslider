@@ -32,7 +32,7 @@
      * @param {MouseEvent} e
      */
     function handleDrag(e) {
-        sliderPercent = (e.pageX - invisibleCover.getBoundingClientRect().x) / invisibleCover.getBoundingClientRect().width * 100;
+        sliderPercent = (e.clientX - invisibleCover.getBoundingClientRect().x) / invisibleCover.getBoundingClientRect().width * 100;
         sliderPercent = Math.min(Math.max(sliderPercent, 0), 100);
     }
     /**
@@ -40,7 +40,7 @@
      * @param {TouchEvent} e
      */
     function handleMobileDrag(e) {
-        sliderPercent = (e.touches[0].pageX - invisibleCover.getBoundingClientRect().x) / invisibleCover.getBoundingClientRect().width * 100;
+        sliderPercent = (e.touches[0].clientX - invisibleCover.getBoundingClientRect().x) / invisibleCover.getBoundingClientRect().width * 100;
         sliderPercent = Math.min(Math.max(sliderPercent, 0), 100);
     }
 </script>
@@ -112,6 +112,7 @@
             handleDrag(e);
         }}
         on:touchstart={(e) => {
+            e.preventDefault();
             dragging = true;
             handleMobileDrag(e);
         }}
